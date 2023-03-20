@@ -32,7 +32,6 @@ export default function SignIn() {
     });
 
     const [userDetails] = await getUserDetails();
-    console.log('🟡 : userDetails:', userDetails);
     if (userDetails.onboarding_completed) {
       router.push('/');
     } else {

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import supabase from '@/supabase';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,7 +19,7 @@ export default function Home() {
       const user = await getCurrentUser();
       if (user) {
         const [userDetails] = await getUserDetails();
-        if (!userDetails.onboarding_completed) {
+        if (!userDetails?.onboarding_completed) {
           router.push('/welcome/about');
         }
       }
@@ -27,6 +27,24 @@ export default function Home() {
     }
     handler();
   }, [router]);
+
+  const nextSaturdayDate = useCallback(() => {
+    let today = new Date();
+    let dayOfWeek = today.getDay();
+    let daysUntilSaturday = (6 - dayOfWeek + 7) % 7;
+    let nextSaturday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + daysUntilSaturday
+    );
+    const options = {
+      weekday: undefined,
+      year: undefined,
+      month: 'long',
+      day: 'numeric',
+    };
+    return nextSaturday.toLocaleDateString('default', options);
+  }, [])();
 
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();
@@ -45,8 +63,7 @@ export default function Home() {
   async function handleSubmit(e) {
     e.preventDefault();
     const { error } = await supabase.auth.signOut();
-    console.log(error);
-    router.push('/');
+    setUserExists(false);
   }
 
   return (
@@ -59,15 +76,22 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {!isLoading ? (
-          <div>
-            <h1>Do you want to go on a date this Saturday?</h1>
-            {userExists ? (
-              'Yes'
-            ) : (
-              <Link href='/sign-up'>Sign up to get started</Link>
-            )}
-            {userExists ? <p onClick={handleSubmit}>Sign out</p> : null}
-          </div>
+          <>
+            <div>
+              <h1>Do you want to go on a date this Saturday?</h1>
+              {userExists ? (
+                'Yes'
+              ) : (
+                <Link href='/sign-in'>Sign in to get started</Link>
+              )}
+              {userExists ? <p onClick={handleSubmit}>Sign out</p> : null}
+            </div>
+            <div>
+              Please keep your calendar free from 5pm to 10pm this Saturday. We
+              will select a time and place for your date based on you and your
+              date’s preferences.
+            </div>
+          </>
         ) : null}
       </main>
     </>

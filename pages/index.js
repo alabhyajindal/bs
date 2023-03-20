@@ -87,9 +87,9 @@ export default function Home() {
               {userExists ? <p onClick={handleSubmit}>Sign out</p> : null}
             </div>
             <div>
-              Please keep your calendar free from 5pm to 10pm this Saturday. We
-              will select a time and place for your date based on you and your
-              date’s preferences.
+              Please keep your calendar free from 5pm to 10pm this Saturday,{' '}
+              {nextSaturdayDate}. We will select a time and place for your date
+              based on you and your date’s preferences.
             </div>
           </>
         ) : null}

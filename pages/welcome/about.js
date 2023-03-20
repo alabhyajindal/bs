@@ -13,16 +13,14 @@ export default function About() {
   const [neighborhood, setNeighborhood] = useState('');
 
   async function getCurrentUser() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    return user;
+    const { data, error } = await supabase.auth.getSession();
+    return data.session.user;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     const user = await getCurrentUser();
-    const { error } = await supabase.from('users').insert({
+    const { error } = await supabase.from('users').upsert({
       id: user.id,
       full_name: fullName,
       age: Number(age),

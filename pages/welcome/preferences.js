@@ -12,10 +12,8 @@ export default function Preferences() {
   const [neighborhood, setNeighborhood] = useState('');
 
   async function getCurrentUser() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    return user;
+    const { data, error } = await supabase.auth.getSession();
+    return data.session.user;
   }
 
   async function handleSubmit(e) {
@@ -28,6 +26,7 @@ export default function Preferences() {
         prefers_gender: gender,
         prefers_sexual_orientation: sexualOrientation,
         prefers_neighborhood: neighborhood,
+        onboarding_completed: true,
       })
       .eq('id', user.id);
 

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import styles from '@/styles/Home.module.css';
 import { useState } from 'react';
 import supabase from '@/supabase';
 import Link from 'next/link';
@@ -28,41 +27,36 @@ export default function SignUp() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className={styles.main}>
-        <div>
-          <h1>Blind Saturday</h1>
-          <div>
-            <h2>Sign up</h2>
-            <form onSubmit={handleSubmit}>
-              <label>
-                Email:
-                <input
-                  type='email'
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </label>
-              <br />
-              <label>
-                Password:
-                <input
-                  type='password'
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </label>
-              <br />
-              <input type='submit' value='Submit' />
-            </form>
+      <div>
+        <h2>Sign up</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Email:
+            <input
+              type='email'
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input
+              type='password'
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </label>
+          <br />
+          <input type='submit' value='Submit' />
+        </form>
 
-            <div>
-              <p>
-                Already have an account? <Link href='/sign-in'>Sign in</Link>
-              </p>
-            </div>
-          </div>
+        <div>
+          <p>
+            Already have an account? <Link href='/sign-in'>Sign in</Link>
+          </p>
         </div>
-      </main>
+      </div>
     </>
   );
 }

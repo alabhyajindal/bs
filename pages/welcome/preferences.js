@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styles from '@/styles/Home.module.css';
 import supabase from '@/supabase';
 import { useRouter } from 'next/router';
 
@@ -34,7 +33,7 @@ export default function Preferences() {
   }
 
   return (
-    <main className={styles.main}>
+    <div>
       <h1>Tell us who you are interested in</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -75,6 +74,6 @@ export default function Preferences() {
         <br />
         <input type='submit' value='Submit' />
       </form>
-    </main>
+    </div>
   );
 }

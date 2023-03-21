@@ -69,16 +69,20 @@ export default function Home() {
       </Head>
       {!isLoading ? (
         <>
-          <div>
-            <h1>Do you want to go on a date this Saturday?</h1>
-            {userExists ? (
-              'Yes'
-            ) : (
-              <Link href='/sign-in'>Sign in to get started</Link>
-            )}
-            {userExists ? <p onClick={handleSubmit}>Sign out</p> : null}
+          <div className='mt-8'>
+            <h1 className='text-2xl'>
+              Do you want to go on a date this Saturday?
+            </h1>
+            <div className='mt-2 underline'>
+              {userExists ? (
+                'Yes'
+              ) : (
+                <Link href='/sign-in'>Sign in to get started</Link>
+              )}
+              {userExists ? <p onClick={handleSubmit}>Sign out</p> : null}
+            </div>
           </div>
-          <div>
+          <div className='mt-4'>
             {userExists
               ? `Please keep your calendar free from 5pm to 10pm this Saturday,{' '}
               ${nextSaturdayDate}. We will select a time and place for your date

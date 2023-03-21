@@ -13,11 +13,6 @@ export default function SignIn() {
 
   const router = useRouter();
 
-  // async function getCurrentUser() {
-  //   const { data, error } = await supabase.auth.getSession();
-  //   if (data.session) setUser(data.session.user.id);
-  // }
-
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();
     return data;
@@ -62,10 +57,10 @@ export default function SignIn() {
           />
         </form>
         <button
-          onSubmit={handleSubmit}
+          onClick={handleSubmit}
           className='mt-4  text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
         >
-          Submit
+          Sign in
         </button>
 
         <p className='mt-12'>

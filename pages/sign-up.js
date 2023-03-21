@@ -27,35 +27,34 @@ export default function SignUp() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>
-        <h2>Sign up</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email:
-            <input
-              type='email'
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input
-              type='password'
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label>
-          <br />
-          <input type='submit' value='Submit' />
+      <div className='mt-8'>
+        <h2 className='text-2xl'>Sign up</h2>
+        <form className='mt-4 flex flex-col justify-center'>
+          <input
+            className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+            type='email'
+            value={email}
+            placeholder='Email'
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <input
+            className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+            type='password'
+            value={password}
+            placeholder='Password'
+            onChange={(event) => setPassword(event.target.value)}
+          />
         </form>
+        <button
+          onClick={handleSubmit}
+          className='mt-4  text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+        >
+          Sign up
+        </button>
 
-        <div>
-          <p>
-            Already have an account? <Link href='/sign-in'>Sign in</Link>
-          </p>
-        </div>
+        <p className='mt-12'>
+          Already have an account? <Link href='/sign-in'>Sign in</Link>
+        </p>
       </div>
     </>
   );

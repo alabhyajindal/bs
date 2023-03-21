@@ -56,10 +56,20 @@ export default function Home() {
     return null;
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit() {
     const { error } = await supabase.auth.signOut();
     setUserExists(false);
+  }
+
+  async function handleYes() {
+    const user = await getCurrentUser();
+    console.log('🟡 : user:', user);
+    const { error } = await supabase
+      .from('users')
+      .update({
+        this_saturday_confirm: true,
+      })
+      .eq('id', user.id);
   }
 
   return (
@@ -74,7 +84,10 @@ export default function Home() {
           </h1>
           <div className='mt-2'>
             {userExists ? (
-              <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
+              <button
+                className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+                onClick={handleYes}
+              >
                 Yes
               </button>
             ) : (

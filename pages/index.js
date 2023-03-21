@@ -68,28 +68,27 @@ export default function Home() {
         <title>Blind Saturday</title>
       </Head>
       {!isLoading ? (
-        <>
-          <div className='mt-8'>
-            <h1 className='text-2xl'>
-              Do you want to go on a date this Saturday?
-            </h1>
-            <div className='mt-2 underline'>
-              {userExists ? (
-                'Yes'
-              ) : (
+        <div className='mt-8 max-w-md'>
+          <h1 className='text-2xl'>
+            Do you want to go on a date this Saturday?
+          </h1>
+          <div className='mt-2'>
+            {userExists ? (
+              <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
+                Yes
+              </button>
+            ) : (
+              <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
                 <Link href='/sign-in'>Sign in to get started</Link>
-              )}
-              {userExists ? <p onClick={handleSubmit}>Sign out</p> : null}
-            </div>
+              </button>
+            )}
+            {userExists ? (
+              <p className='mt-12 cursor-pointer' onClick={handleSubmit}>
+                Sign out
+              </p>
+            ) : null}
           </div>
-          <div className='mt-4'>
-            {userExists
-              ? `Please keep your calendar free from 5pm to 10pm this Saturday,{' '}
-              ${nextSaturdayDate}. We will select a time and place for your date
-              based on you and your date&apos;s preferences.`
-              : null}
-          </div>
-        </>
+        </div>
       ) : null}
     </>
   );

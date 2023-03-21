@@ -58,13 +58,16 @@ export default function SignIn() {
         </form>
         <button
           onClick={handleSubmit}
-          className='mt-4  text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+          className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
         >
           Sign in
         </button>
 
-        <p className='mt-12'>
-          Don&apos;t have an account? <Link href='/sign-up'>Sign up</Link>
+        <p className='mt-12 text-slate-500'>
+          Don&apos;t have an account?{' '}
+          <span className='text-slate-700'>
+            <Link href='/sign-up'>Sign up</Link>
+          </span>
         </p>
       </div>
     </>

@@ -52,8 +52,11 @@ export default function SignUp() {
           Sign up
         </button>
 
-        <p className='mt-12'>
-          Already have an account? <Link href='/sign-in'>Sign in</Link>
+        <p className='mt-12 text-slate-500'>
+          Already have an account?{' '}
+          <span className='text-slate-700'>
+            <Link href='/sign-in'>Sign in</Link>
+          </span>
         </p>
       </div>
     </>

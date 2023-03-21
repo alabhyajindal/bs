@@ -63,13 +63,14 @@ export default function Home() {
 
   async function handleYes() {
     const user = await getCurrentUser();
-    console.log('🟡 : user:', user);
     const { error } = await supabase
       .from('users')
       .update({
         this_saturday_confirm: true,
       })
       .eq('id', user.id);
+
+    router.push('/date/find');
   }
 
   return (

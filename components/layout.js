@@ -10,7 +10,7 @@ export default function Layout({ children }) {
         {children}
       </main>
       <Footer />
-      <Toaster position='bottom-center' />
+      <Toaster position='bottom-center' toastOptions={{ duration: 1000 }} />
     </div>
   );
 }

@@ -10,11 +10,11 @@ export default function Footer() {
 
   useEffect(() => {
     async function handler() {
-      const user = await getCurrentUser();
+      await getCurrentUser();
       setIsLoading(false);
     }
     handler();
-  }, [router]);
+  }, [router, userExists]);
 
   async function getCurrentUser() {
     const { data, error } = await supabase.auth.getSession();
@@ -29,7 +29,6 @@ export default function Footer() {
     const { error } = await supabase.auth.signOut();
     setUserExists(false);
     router.push('/');
-    window.location.reload();
   }
 
   return (

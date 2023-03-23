@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import supabase from '@/supabase';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,13 +34,40 @@ export default function SignIn() {
     }
   }
 
+  async function handleSignin() {
+    const signInPromise = new Promise(async (resolve, reject) => {
+      try {
+        let { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        const [userDetails] = await getUserDetails();
+        resolve(data);
+        if (userDetails?.onboarding_completed) {
+          router.push('/');
+        } else {
+          router.push('/welcome/about');
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+
+    toast.promise(signInPromise, {
+      loading: 'Signing in',
+      success: 'Signed in',
+      error: 'Please try again later',
+    });
+  }
+
   return (
     <>
       <Head>
         <title>Sign in | Blind Saturday</title>
       </Head>
-      <div className='mt-8'>
-        <h2 className='text-2xl'>Sign in</h2>
+      <div className='mt-8 flex flex-col items-center'>
+        <h2 className='text-3xl'>Sign in</h2>
         <form className='mt-4 flex flex-col justify-center'>
           <input
             className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
@@ -57,8 +85,8 @@ export default function SignIn() {
           />
         </form>
         <button
-          onClick={handleSubmit}
-          className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+          onClick={handleSignin}
+          className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
         >
           Sign in
         </button>

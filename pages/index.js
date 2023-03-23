@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     async function handler() {
-      const user = await getCurrentUser();
+      await getCurrentUser();
       setIsLoading(false);
     }
     handler();

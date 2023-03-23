@@ -13,11 +13,12 @@ export default function Home() {
   useEffect(() => {
     async function handler() {
       const user = await getCurrentUser();
-      console.log('🟡 : user:', user);
       if (user) {
         const [userDetails] = await getUserDetails();
         if (!userDetails?.onboarding_completed) {
           router.push('/welcome/about');
+        } else if (userDetails?.this_saturday_confirm) {
+          router.push('/date/start');
         }
       }
       setIsLoading(false);

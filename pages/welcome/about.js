@@ -17,7 +17,7 @@ export default function About() {
     return data.session.user;
   }
 
-  async function handleSubmit(e) {
+  async function handleNext(e) {
     e.preventDefault();
     const user = await getCurrentUser();
     const { error } = await supabase.from('users').upsert({
@@ -37,56 +37,50 @@ export default function About() {
       <Head>
         <title>Welcome | Blind Saturday</title>
       </Head>
-      <div>
-        <h1>Tell us about yourself</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Full Name:
-            <input
-              type='text'
-              value={fullName}
-              onChange={(event) => setFullName(event.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Age:
-            <input
-              type='number'
-              value={age}
-              onChange={(event) => setAge(event.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Gender:
-            <input
-              type='text'
-              value={gender}
-              onChange={(event) => setGender(event.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Sexual Orientation:
-            <input
-              type='text'
-              value={sexualOrientation}
-              onChange={(event) => setSexualOrientation(event.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Neighborhood:
-            <input
-              type='text'
-              value={neighborhood}
-              onChange={(event) => setNeighborhood(event.target.value)}
-            />
-          </label>
-          <br />
-          <input type='submit' value='Submit' />
-        </form>
+      <div className='mt-4 flex flex-col items-center'>
+        <h1 className='text-3xl'>Tell us about yourself</h1>
+        <input
+          type='text'
+          className='mt-4 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+          placeholder='Full Name'
+          value={fullName}
+          onChange={(event) => setFullName(event.target.value)}
+        />
+        <input
+          type='number'
+          className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+          placeholder='Age'
+          value={age}
+          onChange={(event) => setAge(event.target.value)}
+        />
+        <input
+          type='text'
+          className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+          placeholder='Gender'
+          value={gender}
+          onChange={(event) => setGender(event.target.value)}
+        />
+        <input
+          type='text'
+          className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+          placeholder='Sexual Orientation'
+          value={sexualOrientation}
+          onChange={(event) => setSexualOrientation(event.target.value)}
+        />
+        <input
+          type='text'
+          className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+          placeholder='Neighborhood'
+          value={neighborhood}
+          onChange={(event) => setNeighborhood(event.target.value)}
+        />
+
+        <button
+          onClick={handleNext}
+          className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md mx-auto'
+        >
+          Next
+        </button>
       </div>
     </>
   );

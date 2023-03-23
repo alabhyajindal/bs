@@ -37,18 +37,15 @@ export default function Footer() {
       {!isLoading ? (
         <>
           {userExists ? (
-            <p className='cursor-pointer' onClick={handleSignout}>
-              Sign out
-            </p>
-          ) : // <p
-          //   className='cursor-pointer'
-          //   onClick={() => router.push('/sign-in')}
-          // >
-          //   Sign in
-          // </p>
-          null}
-          <p>Edit profile</p>
-          <a href='mailto:alabhya@blindsaturday.com'>Support</a>
+            <>
+              <p className='cursor-pointer' onClick={handleSignout}>
+                Sign out
+              </p>
+              <p>Edit profile</p>
+            </>
+          ) : (
+            <a href='mailto:alabhya@blindsaturday.com'>Support</a>
+          )}
         </>
       ) : null}
     </footer>

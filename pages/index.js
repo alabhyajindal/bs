@@ -84,9 +84,9 @@ export default function Home() {
           ) : (
             <div className='flex flex-col '>
               <h1 className='text-2xl'>Go on a blind date this Saturday</h1>
-              <Link href='/sign-in' className='mx-auto'>
+              <Link href='/sign-up' className='mx-auto'>
                 <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
-                  Sign in
+                  Sign up
                 </button>
               </Link>
             </div>

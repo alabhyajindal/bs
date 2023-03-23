@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { useState } from 'react';
 import supabase from '@/supabase';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -10,13 +11,24 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    let { data, error } = await supabase.auth.signUp({
-      email,
-      password,
+  async function handleSignout() {
+    const signUpPromise = new Promise(async (resolve, reject) => {
+      try {
+        let { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+        resolve(data);
+      } catch (err) {
+        reject(err);
+      }
     });
-    alert('Check your email to confirm your account');
+
+    toast.promise(signUpPromise, {
+      loading: 'Creating your account',
+      success: 'Check your mail',
+      error: 'Please try again later',
+    });
   }
 
   return (
@@ -24,8 +36,8 @@ export default function SignUp() {
       <Head>
         <title>Sign up | Blind Saturday</title>
       </Head>
-      <div className='mt-8'>
-        <h2 className='text-2xl'>Sign up</h2>
+      <div className='mt-8 flex flex-col items-center'>
+        <h2 className='text-3xl'>Sign up</h2>
         <form className='mt-4 flex flex-col justify-center'>
           <input
             className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
@@ -43,8 +55,8 @@ export default function SignUp() {
           />
         </form>
         <button
-          onClick={handleSubmit}
-          className='mt-4  text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+          onClick={handleSignout}
+          className='mt-6  text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
         >
           Sign up
         </button>

@@ -70,17 +70,17 @@ export default function Home() {
       {!isLoading ? (
         <div className='mt-8 max-w-md'>
           {userExists ? (
-            <>
-              <h1 className='text-2xl'>
+            <div className='flex flex-col '>
+              <h1 className='text-2xl text-center'>
                 Do you want to go on a date this Saturday?
               </h1>
               <button
-                className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+                className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md mx-auto'
                 onClick={handleYes}
               >
                 Yes
               </button>
-            </>
+            </div>
           ) : (
             <div className='flex flex-col '>
               <h1 className='text-2xl'>Go on a blind date this Saturday</h1>

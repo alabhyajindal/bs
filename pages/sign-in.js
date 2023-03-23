@@ -26,7 +26,7 @@ export default function SignIn() {
     });
 
     const [userDetails] = await getUserDetails();
-    if (userDetails.onboarding_completed) {
+    if (userDetails?.onboarding_completed) {
       router.push('/');
     } else {
       router.push('/welcome/about');

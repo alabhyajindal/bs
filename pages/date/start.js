@@ -56,11 +56,6 @@ export default function Start() {
     return null;
   }
 
-  async function handleSubmit() {
-    const { error } = await supabase.auth.signOut();
-    setUserExists(false);
-  }
-
   async function handleYes() {
     const user = await getCurrentUser();
     const { error } = await supabase
@@ -96,11 +91,6 @@ export default function Start() {
                 <Link href='/sign-in'>Sign in to get started</Link>
               </button>
             )}
-            {userExists ? (
-              <p className='mt-12 cursor-pointer' onClick={handleSubmit}>
-                Sign out
-              </p>
-            ) : null}
           </div>
         </div>
       ) : null}

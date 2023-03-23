@@ -79,7 +79,7 @@ export default function Home() {
         <div className='mt-8 max-w-md'>
           {userExists ? (
             <div className='flex flex-col '>
-              <h1 className='text-2xl text-center'>
+              <h1 className='text-3xl text-center'>
                 Do you want to go on a date this Saturday?
               </h1>
               <button
@@ -91,7 +91,7 @@ export default function Home() {
             </div>
           ) : (
             <div className='flex flex-col '>
-              <h1 className='text-2xl'>Go on a blind date this Saturday</h1>
+              <h1 className='text-3xl'>Go on a blind date this Saturday</h1>
               <Link href='/sign-up' className='mx-auto'>
                 <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
                   Sign up

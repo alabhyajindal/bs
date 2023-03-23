@@ -29,6 +29,7 @@ export default function Footer() {
     const { error } = await supabase.auth.signOut();
     setUserExists(false);
     router.push('/');
+    window.location.reload();
   }
 
   return (

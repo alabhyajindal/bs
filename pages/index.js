@@ -16,7 +16,7 @@ export default function Home() {
       setIsLoading(false);
     }
     handler();
-  }, [router]);
+  }, []);
 
   // const nextSaturdayDate = useCallback(() => {
   //   let today = new Date();
@@ -82,12 +82,14 @@ export default function Home() {
               </button>
             </>
           ) : (
-            <>
+            <div className='flex flex-col '>
               <h1 className='text-2xl'>Go on a blind date this Saturday</h1>
-              <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
-                <Link href='/sign-in'>Sign in</Link>
-              </button>
-            </>
+              <Link href='/sign-in' className='mx-auto'>
+                <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
+                  Sign in
+                </button>
+              </Link>
+            </div>
           )}
         </div>
       ) : null}

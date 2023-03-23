@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import supabase from '@/supabase';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Preferences() {
   const router = useRouter();
@@ -29,51 +30,56 @@ export default function Preferences() {
       })
       .eq('id', user.id);
 
-    router.push('/');
+    router.push('/date/start');
   }
 
   return (
-    <div>
-      <h1>Tell us who you are interested in</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Age Range:
-          <input
-            type='text'
-            value={ageRange}
-            onChange={(event) => setAgeRange(event.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Gender:
-          <input
-            type='text'
-            value={gender}
-            onChange={(event) => setGender(event.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Sexual Orientation:
-          <input
-            type='text'
-            value={sexualOrientation}
-            onChange={(event) => setSexualOrientation(event.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Neighborhood:
-          <input
-            type='text'
-            value={neighborhood}
-            onChange={(event) => setNeighborhood(event.target.value)}
-          />
-        </label>
-        <br />
-        <input type='submit' value='Submit' />
-      </form>
-    </div>
+    <>
+      <Head>
+        <title>Welcome | Blind Saturday</title>
+      </Head>
+      <div>
+        <h1>Tell us who you are interested in</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Age Range:
+            <input
+              type='text'
+              value={ageRange}
+              onChange={(event) => setAgeRange(event.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Gender:
+            <input
+              type='text'
+              value={gender}
+              onChange={(event) => setGender(event.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Sexual Orientation:
+            <input
+              type='text'
+              value={sexualOrientation}
+              onChange={(event) => setSexualOrientation(event.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Neighborhood:
+            <input
+              type='text'
+              value={neighborhood}
+              onChange={(event) => setNeighborhood(event.target.value)}
+            />
+          </label>
+          <br />
+          <input type='submit' value='Submit' />
+        </form>
+      </div>
+    </>
   );
 }

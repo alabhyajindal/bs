@@ -27,7 +27,7 @@ export default function SignIn() {
 
     const [userDetails] = await getUserDetails();
     if (userDetails.onboarding_completed) {
-      router.push('/');
+      router.push('/date/start');
     } else {
       router.push('/welcome/about');
     }
@@ -36,7 +36,7 @@ export default function SignIn() {
   return (
     <>
       <Head>
-        <title>Sign in</title>
+        <title>Sign in | Blind Saturday</title>
       </Head>
       <div className='mt-8'>
         <h2 className='text-2xl'>Sign in</h2>

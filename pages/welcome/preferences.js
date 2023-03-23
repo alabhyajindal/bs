@@ -10,6 +10,7 @@ export default function Preferences() {
   const [gender, setGender] = useState('');
   const [sexualOrientation, setSexualOrientation] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
+  const [city, setCity] = useState('');
 
   async function getCurrentUser() {
     const { data, error } = await supabase.auth.getSession();
@@ -26,11 +27,12 @@ export default function Preferences() {
         prefers_gender: gender,
         prefers_sexual_orientation: sexualOrientation,
         prefers_neighborhood: neighborhood,
+        prefers_city: city,
         onboarding_completed: true,
       })
       .eq('id', user.id);
 
-    router.push('/date/start');
+    router.push('/');
   }
 
   return (
@@ -67,6 +69,13 @@ export default function Preferences() {
           placeholder='Neighborhood'
           value={neighborhood}
           onChange={(event) => setNeighborhood(event.target.value)}
+        />
+        <input
+          type='text'
+          className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+          placeholder='City'
+          value={city}
+          onChange={(event) => setCity(event.target.value)}
         />
 
         <button

@@ -39,14 +39,13 @@ export default function Footer() {
             <p className='cursor-pointer' onClick={handleSignout}>
               Sign out
             </p>
-          ) : (
-            <p
-              className='cursor-pointer'
-              onClick={() => router.push('/sign-in')}
-            >
-              Sign in
-            </p>
-          )}
+          ) : // <p
+          //   className='cursor-pointer'
+          //   onClick={() => router.push('/sign-in')}
+          // >
+          //   Sign in
+          // </p>
+          null}
           <p>Edit profile</p>
           <a href='mailto:alabhya@blindsaturday.com'>Support</a>
         </>

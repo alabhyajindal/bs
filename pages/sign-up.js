@@ -18,17 +18,25 @@ export default function SignUp() {
           email,
           password,
         });
-        resolve(data);
+        if (!error) {
+          resolve(data);
+        } else {
+          throw new Error(error);
+        }
       } catch (err) {
         reject(err);
       }
     });
 
-    toast.promise(signUpPromise, {
-      loading: 'Creating your account',
-      success: 'Check your mail',
-      error: 'Please try again later',
-    });
+    toast.promise(
+      signUpPromise,
+      {
+        loading: 'Creating your account',
+        success: 'Check your mail',
+        error: 'Please try again later',
+      },
+      { duration: 3000 }
+    );
   }
 
   return (

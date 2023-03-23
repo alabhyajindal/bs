@@ -42,12 +42,16 @@ export default function SignIn() {
           password,
         });
 
-        const [userDetails] = await getUserDetails();
-        resolve(data);
-        if (userDetails?.onboarding_completed) {
-          router.push('/');
+        if (!error) {
+          const [userDetails] = await getUserDetails();
+          resolve(data);
+          if (userDetails?.onboarding_completed) {
+            router.push('/');
+          } else {
+            router.push('/welcome/about');
+          }
         } else {
-          router.push('/welcome/about');
+          throw new Error(error);
         }
       } catch (err) {
         reject(err);
@@ -57,7 +61,7 @@ export default function SignIn() {
     toast.promise(signInPromise, {
       loading: 'Signing in',
       success: 'Signed in',
-      error: 'Please try again later',
+      error: 'Error',
     });
   }
 

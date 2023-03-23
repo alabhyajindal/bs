@@ -12,11 +12,18 @@ export default function Home() {
 
   useEffect(() => {
     async function handler() {
-      await getCurrentUser();
+      const user = await getCurrentUser();
+      console.log('🟡 : user:', user);
+      if (user) {
+        const [userDetails] = await getUserDetails();
+        if (!userDetails?.onboarding_completed) {
+          router.push('/welcome/about');
+        }
+      }
       setIsLoading(false);
     }
     handler();
-  }, []);
+  }, [router]);
 
   // const nextSaturdayDate = useCallback(() => {
   //   let today = new Date();

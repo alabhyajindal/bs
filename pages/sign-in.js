@@ -88,42 +88,44 @@ export default function SignIn() {
 
   return (
     <>
-      <Head>
-        <title>Sign in | Blind Saturday</title>
-      </Head>
       {!isLoading ? (
-        <div className='mt-8 flex flex-col items-center'>
-          <h2 className='text-3xl'>Sign in</h2>
-          <form className='mt-4 flex flex-col justify-center'>
-            <input
-              className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
-              type='email'
-              value={email}
-              placeholder='Email'
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <input
-              className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
-              type='password'
-              value={password}
-              placeholder='Password'
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </form>
-          <button
-            onClick={handleSignin}
-            className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
-          >
-            Sign in
-          </button>
+        <>
+          <Head>
+            <title>Sign in | Blind Saturday</title>
+          </Head>
+          <div className='mt-8 flex flex-col items-center'>
+            <h2 className='text-3xl'>Sign in</h2>
+            <form className='mt-4 flex flex-col justify-center'>
+              <input
+                className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+                type='email'
+                value={email}
+                placeholder='Email'
+                onChange={(event) => setEmail(event.target.value)}
+              />
+              <input
+                className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+                type='password'
+                value={password}
+                placeholder='Password'
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </form>
+            <button
+              onClick={handleSignin}
+              className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+            >
+              Sign in
+            </button>
 
-          <p className='mt-12 text-slate-500'>
-            Don&apos;t have an account?{' '}
-            <span className='text-slate-700'>
-              <Link href='/sign-up'>Sign up</Link>
-            </span>
-          </p>
-        </div>
+            <p className='mt-12 text-slate-500'>
+              Don&apos;t have an account?{' '}
+              <span className='text-slate-700'>
+                <Link href='/sign-up'>Sign up</Link>
+              </span>
+            </p>
+          </div>
+        </>
       ) : null}
     </>
   );

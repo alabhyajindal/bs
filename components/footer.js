@@ -1,38 +1,52 @@
 import supabase from '@/supabase';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-export default function Footer({ userExists }) {
+export default function Footer() {
   const router = useRouter();
+
+  const [userExists, setUserExists] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function handler() {
+      await getCurrentUser();
+      setIsLoading(false);
+    }
+    handler();
+  }, [router, userExists]);
+
+  async function getCurrentUser() {
+    const { data, error } = await supabase.auth.getSession();
+    if (data.session) {
+      setUserExists(true);
+      return data.session.user;
+    }
+    return null;
+  }
 
   async function handleSignout() {
     const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error(error);
-    } else {
-      router.push('/');
-    }
+    setUserExists(false);
+    router.push('/');
   }
 
   return (
     <footer className='flex gap-6 text-slate-500 mt-auto mb-4'>
-      {userExists ? (
+      {!isLoading ? (
         <>
-          <p className='cursor-pointer' onClick={handleSignout}>
-            Sign out
-          </p>
-          <p>Edit profile</p>
+          {userExists ? (
+            <>
+              <p className='cursor-pointer' onClick={handleSignout}>
+                Sign out
+              </p>
+              <p>Edit profile</p>
+            </>
+          ) : (
+            <a href='mailto:alabhya@blindsaturday.com'>Support</a>
+          )}
         </>
-      ) : (
-        <a href='mailto:alabhya@blindsaturday.com'>Support</a>
-      )}
+      ) : null}
     </footer>
   );
-}
-
-export async function getServerSideProps() {
-  const { data, error } = await supabase.auth.getSession();
-  if (data?.session?.user) {
-    return { props: { userExists: true } };
-  }
-  return { props: { userExists: false } };
 }

@@ -22,10 +22,12 @@ export default function Home() {
         } else {
           setIsLoading(false);
         }
+      } else {
+        setIsLoading(false);
       }
     }
     handler();
-  }, [router]);
+  }, []);
 
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();

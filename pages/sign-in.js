@@ -8,22 +8,37 @@ import { toast } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function SignIn({ userExists }) {
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (userExists) {
-      router.push('/');
-    }
-  }, [router, userExists]);
 
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();
     return data;
   }
+
+  async function getCurrentUser() {
+    const { data, error } = await supabase.auth.getSession();
+    if (data.session) {
+      return data.session.user;
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    async function handler() {
+      const user = await getCurrentUser();
+      if (user) {
+        router.push('/');
+      } else {
+        setIsLoading(false);
+      }
+    }
+    handler();
+  }, [router]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -76,46 +91,40 @@ export default function SignIn({ userExists }) {
       <Head>
         <title>Sign in | Blind Saturday</title>
       </Head>
-      <div className='mt-8 flex flex-col items-center'>
-        <h2 className='text-3xl'>Sign in</h2>
-        <form className='mt-4 flex flex-col justify-center'>
-          <input
-            className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
-            type='email'
-            value={email}
-            placeholder='Email'
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <input
-            className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
-            type='password'
-            value={password}
-            placeholder='Password'
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </form>
-        <button
-          onClick={handleSignin}
-          className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
-        >
-          Sign in
-        </button>
+      {!isLoading ? (
+        <div className='mt-8 flex flex-col items-center'>
+          <h2 className='text-3xl'>Sign in</h2>
+          <form className='mt-4 flex flex-col justify-center'>
+            <input
+              className='border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+              type='email'
+              value={email}
+              placeholder='Email'
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <input
+              className='mt-2 border-4 border-slate-200 w-64 rounded-sm px-6 py-2 outline-none focus:border-slate-300'
+              type='password'
+              value={password}
+              placeholder='Password'
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </form>
+          <button
+            onClick={handleSignin}
+            className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'
+          >
+            Sign in
+          </button>
 
-        <p className='mt-12 text-slate-500'>
-          Don&apos;t have an account?{' '}
-          <span className='text-slate-700'>
-            <Link href='/sign-up'>Sign up</Link>
-          </span>
-        </p>
-      </div>
+          <p className='mt-12 text-slate-500'>
+            Don&apos;t have an account?{' '}
+            <span className='text-slate-700'>
+              <Link href='/sign-up'>Sign up</Link>
+            </span>
+          </p>
+        </div>
+      ) : null}
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const { data, error } = await supabase.auth.getSession();
-  if (data?.session?.user) {
-    return { props: { userExists: true } };
-  }
-  return { props: { userExists: false } };
 }

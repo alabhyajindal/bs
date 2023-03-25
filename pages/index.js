@@ -26,24 +26,6 @@ export default function Home() {
     handler();
   }, [router]);
 
-  // const nextSaturdayDate = useCallback(() => {
-  //   let today = new Date();
-  //   let dayOfWeek = today.getDay();
-  //   let daysUntilSaturday = (6 - dayOfWeek + 7) % 7;
-  //   let nextSaturday = new Date(
-  //     today.getFullYear(),
-  //     today.getMonth(),
-  //     today.getDate() + daysUntilSaturday
-  //   );
-  //   const options = {
-  //     weekday: undefined,
-  //     year: undefined,
-  //     month: 'long',
-  //     day: 'numeric',
-  //   };
-  //   return nextSaturday.toLocaleDateString('default', options);
-  // }, [])();
-
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();
     return data;
@@ -97,6 +79,12 @@ export default function Home() {
                   Sign up
                 </button>
               </Link>
+              <p className='text-center mt-4 text-slate-500'>
+                Already have an account?{' '}
+                <span className='text-slate-700'>
+                  <Link href='/sign-in'>Sign in</Link>
+                </span>
+              </p>
             </div>
           )}
         </div>

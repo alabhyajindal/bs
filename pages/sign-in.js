@@ -8,11 +8,17 @@ import { toast } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function SignIn() {
+export default function SignIn({ userExists }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (userExists) {
+      router.push('/');
+    }
+  }, [router, userExists]);
 
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();
@@ -104,4 +110,12 @@ export default function SignIn() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const { data, error } = await supabase.auth.getSession();
+  if (data?.session?.user) {
+    return { props: { userExists: true } };
+  }
+  return { props: { userExists: false } };
 }

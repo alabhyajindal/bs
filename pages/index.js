@@ -19,9 +19,10 @@ export default function Home() {
           router.push('/welcome/about');
         } else if (userDetails?.this_saturday_confirm) {
           router.push('/date/start');
+        } else {
+          setIsLoading(false);
         }
       }
-      setIsLoading(false);
     }
     handler();
   }, [router]);
@@ -54,40 +55,42 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Blind Saturday</title>
-      </Head>
       {!isLoading ? (
-        <div className='mt-8 max-w-md'>
-          {userExists ? (
-            <div className='flex flex-col '>
-              <h1 className='text-3xl text-center'>
-                Do you want to go on a date this Saturday?
-              </h1>
-              <button
-                className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md mx-auto'
-                onClick={handleYes}
-              >
-                Yes
-              </button>
-            </div>
-          ) : (
-            <div className='flex flex-col '>
-              <h1 className='text-3xl'>Go on a blind date this Saturday</h1>
-              <Link href='/sign-up' className='mx-auto'>
-                <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
-                  Sign up
+        <>
+          <Head>
+            <title>Blind Saturday</title>
+          </Head>
+          <div className='mt-8 max-w-md'>
+            {userExists ? (
+              <div className='flex flex-col '>
+                <h1 className='text-3xl text-center'>
+                  Do you want to go on a date this Saturday?
+                </h1>
+                <button
+                  className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md mx-auto'
+                  onClick={handleYes}
+                >
+                  Yes
                 </button>
-              </Link>
-              <p className='text-center mt-4 text-slate-500'>
-                Already have an account?{' '}
-                <span className='text-slate-700'>
-                  <Link href='/sign-in'>Sign in</Link>
-                </span>
-              </p>
-            </div>
-          )}
-        </div>
+              </div>
+            ) : (
+              <div className='flex flex-col '>
+                <h1 className='text-3xl'>Go on a blind date this Saturday</h1>
+                <Link href='/sign-up' className='mx-auto'>
+                  <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
+                    Sign up
+                  </button>
+                </Link>
+                <p className='text-center mt-4 text-slate-500'>
+                  Already have an account?{' '}
+                  <span className='text-slate-700'>
+                    <Link href='/sign-in'>Sign in</Link>
+                  </span>
+                </p>
+              </div>
+            )}
+          </div>
+        </>
       ) : null}
     </>
   );

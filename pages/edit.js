@@ -1,8 +1,25 @@
+import supabase from '@/supabase';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Edit() {
   const [cancelled, setCancelled] = useState(false);
+
+  useEffect(() => {
+    async function handler() {
+      const [userDetails] = await getUserDetails();
+      if (userDetails?.account_cancelled) {
+        setCancelled(true);
+      }
+    }
+
+    handler();
+  }, []);
+
+  async function getUserDetails() {
+    const { data, error } = await supabase.from('users').select();
+    return data;
+  }
 
   async function getCurrentUser() {
     const { data, error } = await supabase.auth.getSession();
@@ -37,7 +54,9 @@ export default function Edit() {
           </p>
         </>
       ) : (
-        <p className='mt-4 cursor-pointer text-lg'>Cancel my account</p>
+        <p className='mt-4 cursor-pointer text-lg' onClick={cancelAccount}>
+          Cancel my account
+        </p>
       )}
     </>
   );

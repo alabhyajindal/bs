@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <div className='flex flex-col items-center min-h-screen bg-fuchsia-200'>
       <Navbar />
-      <main className='text-slate-700 flex flex-col items-center justify-center text-center'>
+      <main className='text-slate-700 flex flex-col items-center justify-center text-center max-w-md'>
         {children}
       </main>
       <Footer />

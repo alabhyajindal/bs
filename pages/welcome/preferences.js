@@ -32,7 +32,7 @@ export default function Preferences() {
       })
       .eq('id', user.id);
 
-    router.push('/');
+    router.push('/welcome/security');
   }
 
   return (

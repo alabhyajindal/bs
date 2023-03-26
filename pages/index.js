@@ -80,7 +80,7 @@ export default function Home() {
             ) : (
               <div className='flex flex-col '>
                 <div>
-                  <h1 className='text-4xl'>How it works:</h1>
+                  <h1 className='text-4xl'>How it works</h1>
                   <ul className='text-lg mt-4'>
                     <li>Sign up!</li>
                     <li>Tell us about yourself</li>
@@ -100,6 +100,13 @@ export default function Home() {
                     <Link href='/sign-in'>Sign in</Link>
                   </span>
                 </p>
+
+                <div>
+                  <h1 className='text-4xl mt-8'>Got 3 minutes? Curious?</h1>
+                  <video width='100%' controls className='mt-4 mb-8'>
+                    <source src='/walkthrough.mp4' type='video/mp4' />
+                  </video>
+                </div>
               </div>
             )}
           </div>

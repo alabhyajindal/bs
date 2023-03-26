@@ -25,7 +25,7 @@ export default function Fee() {
   return (
     <>
       <Head>
-        <title>Setup Fee || Blind Saturday</title>
+        <title>Setup Fee | Blind Saturday</title>
       </Head>
       <form action='/api/checkout_sessions' method='POST'>
         <p className='mt-4'>

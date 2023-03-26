@@ -15,10 +15,10 @@ export default function Home() {
       const user = await getCurrentUser();
       if (user) {
         const [userDetails] = await getUserDetails();
-        if (!userDetails?.onboarding_completed) {
+        if (!userDetails?.profile_completed) {
           router.push('/welcome/about');
         } else if (!userDetails?.security_deposit_complete) {
-          router.push('/welcome/finish');
+          router.push('/welcome/fee');
         } else if (userDetails?.this_saturday_confirm) {
           router.push('/date/start');
         } else {

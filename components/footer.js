@@ -1,4 +1,5 @@
 import supabase from '@/supabase';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -40,7 +41,9 @@ export default function Footer() {
               <p className='cursor-pointer' onClick={handleSignout}>
                 Sign out
               </p>
-              <p>Edit profile</p>
+              <Link href='/edit'>
+                <p>Edit profile</p>
+              </Link>
             </>
           ) : (
             <a href='mailto:alabhya@blindsaturday.com'>Support</a>

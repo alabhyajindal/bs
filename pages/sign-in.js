@@ -48,7 +48,7 @@ export default function SignIn() {
     });
 
     const [userDetails] = await getUserDetails();
-    if (userDetails?.onboarding_completed) {
+    if (userDetails?.profile_completed) {
       router.push('/');
     } else {
       router.push('/welcome/about');
@@ -66,7 +66,7 @@ export default function SignIn() {
         if (!error) {
           const [userDetails] = await getUserDetails();
           resolve(data);
-          if (userDetails?.onboarding_completed) {
+          if (userDetails?.profile_completed) {
             router.push('/');
           } else {
             router.push('/welcome/about');

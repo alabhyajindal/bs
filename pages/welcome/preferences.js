@@ -28,7 +28,7 @@ export default function Preferences() {
         prefers_sexual_orientation: sexualOrientation,
         prefers_neighborhood: neighborhood,
         prefers_city: city,
-        onboarding_completed: true,
+        profile_completed: true,
       })
       .eq('id', user.id);
 

@@ -29,7 +29,7 @@ export default function Home() {
       }
     }
     handler();
-  }, []);
+  }, [router]);
 
   async function getUserDetails() {
     const { data, error } = await supabase.from('users').select();

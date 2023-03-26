@@ -46,7 +46,7 @@ export default function Footer() {
               </Link>
             </>
           ) : (
-            <a href='mailto:alabhya@blindsaturday.com'>Support</a>
+            <a href='mailto:alabhya10@gmail.com'>Support</a>
           )}
         </>
       ) : null}

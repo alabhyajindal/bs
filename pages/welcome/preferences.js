@@ -33,7 +33,7 @@ export default function Preferences() {
       .eq('id', user.id);
 
     if (!error) {
-      router.push('/welcome/security');
+      router.push('/welcome/fee');
     }
   }
 

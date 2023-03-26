@@ -79,9 +79,18 @@ export default function Home() {
               </div>
             ) : (
               <div className='flex flex-col '>
-                <h1 className='text-3xl'>Go on a blind date this Saturday</h1>
+                <div>
+                  <h1 className='text-4xl'>How it works:</h1>
+                  <ul className='text-lg mt-4'>
+                    <li>Sign up!</li>
+                    <li>Tell us about yourself</li>
+                    <li>Tell us who you are interested in</li>
+                    <li>Pay a fully refundable setup fee of ₹500</li>
+                    <li>Get a blind date for the upcoming Saturday</li>
+                  </ul>
+                </div>
                 <Link href='/sign-up' className='mx-auto'>
-                  <button className='mt-4 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
+                  <button className='mt-6 text-slate-100 bg-slate-700 px-12 py-4 rounded-md'>
                     Sign up
                   </button>
                 </Link>

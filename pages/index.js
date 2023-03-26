@@ -17,6 +17,8 @@ export default function Home() {
         const [userDetails] = await getUserDetails();
         if (!userDetails?.onboarding_completed) {
           router.push('/welcome/about');
+        } else if (!userDetails?.security_deposit_complete) {
+          router.push('/welcome/finish');
         } else if (userDetails?.this_saturday_confirm) {
           router.push('/date/start');
         } else {
